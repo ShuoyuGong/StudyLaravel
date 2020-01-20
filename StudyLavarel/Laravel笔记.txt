@@ -1,0 +1,58 @@
+**********************第一节*HTTP协议模拟发送**********************
+1.简介
+	客户端发送http请求给服务器，服务器接收到了之后返回http响应回复给客户端
+2.模拟发送
+  a.模拟get请求
+    1.get_client.php
+      <?php
+      // 创建连接
+      $fp = fsockopen("localhost", 80, $errno, $errstr, 10);
+      // 检测
+      if (!$fp) {
+        echo $errstr;
+        die;
+      }
+      // 拼接http请求报文
+      $http = "";
+      // 请求报文包括三个部分 请求行 请求头 请求体
+      // 请求头包括三部分 请求方式 请求脚本的绝对路径 请求版本
+      $http .= "GET /lavarel/1.http/server.php HTTP/1.1\r\n";
+      // 请求头信息
+      $http .= "Host: localhost\r\n";
+      $http .= "Connection: close\r\n\r\n";
+
+      // 请求体 无
+
+      // 发送请求
+      fwrite($fp, $http);
+
+      $res = "";
+      // 获取结果
+      while (!feof($fp)) {
+        $res .= fgets($fp);
+      }
+
+      // 输出
+      var_dump( $res);
+
+      2.get_server.php
+        <?php
+        echo "I lOVE YOU VERY MUCH";
+      
+      3.浏览器打印的返回的数据
+        //响应行
+        E:\wamp64\www\lavarel\1.http\client.php:30:string 'HTTP/1.1 200 OK
+
+        //响应头
+        Date: Mon, 20 Jan 2020 10:18:36 GMT
+        Server: Apache/2.4.41 (Win64) PHP/7.0.33
+        X-Powered-By: PHP/7.0.33
+        Content-Length: 20
+        Connection: close
+        Content-Type: text/html; charset=UTF-8
+
+        //响应体
+        I lOVE YOU VERY MUCH' (length=223)
+  b.模拟post请求
+    1.
+3.实践
