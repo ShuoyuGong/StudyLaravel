@@ -9,17 +9,18 @@ if (!$fp) {
 
 $http = "";
 // 请求行
-$http .= "POST /StudyLaravel/StudyLavarel/1.http/post_server.php HTTP/1.1\r\n";
+$http .= "POST /StudyLaravel/StudyLavarel/1.http/3server.php HTTP/1.1\r\n";
 // 请求头
 $http .= "Host: localhost\r\n";
 $http .= "Connection: close\r\n";
 $http .= "Cookie: username=admin;uid=200\r\n";
-$http .= "User-agent: firefox-chrome-safari\r\n";
-$http .= "Content-type: application/x-www-form/urlencoded\r\n";
+$http .= "User-agent: firefox-chrome-safari-ios-android\r\n";
+$http .= "Content-type: application/x-www-form-urlencoded\r\n";
 $http .= "Content-length: 37\r\n\r\n";
 
 // 请求体
 $http .= "email=xiaohigh@163.com&username=admin\r\n";
+
 
 // 发送
 fwrite($fp, $http);
