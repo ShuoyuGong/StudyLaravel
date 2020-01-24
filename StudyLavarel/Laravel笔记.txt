@@ -156,7 +156,7 @@
       b.命名空间只对函数，类和常量(const)有效，变量是全局有效的
       c.大多数情况下，都是一个文件一个命名空间
 2.命名空间的使用 
-  a.类的操作->PDO->pdo_namespace.php
-    1.系统类
-    2.变量类
+  a.类的操作
+    1.系统类->PDO->pdo_namespace.php
+    2.变量类->class->class_namespace.php
     3.导入
