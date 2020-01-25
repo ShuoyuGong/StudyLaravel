@@ -13,6 +13,6 @@ function __autoload($className)
   // echo $path;
 }
 // 如果当前类的空间路径很文件所处的路径保持一致的话，很容易获取到当前文件的位置
-$obj = new \Org\B;
+$obj = new \libs\a;
 
 var_dump($obj);
