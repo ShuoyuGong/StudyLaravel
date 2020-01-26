@@ -3,12 +3,20 @@
 // include './vendor/autoload.php';
 require './vendor/autoload.php';
 
+
+// 初级版**************************************************
 // use Endroid\QrCode\QrCode;
 
 // $qrCode = new QrCode('老龚爱你们哦');
 
 // header('Content-Type: ' . $qrCode->getContentType());
 // echo $qrCode->writeString();
+
+
+
+
+
+// 高级版 加了中间的图片logo 和下面的文字**********************************
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\LabelAlignment;
 use Endroid\QrCode\QrCode;
