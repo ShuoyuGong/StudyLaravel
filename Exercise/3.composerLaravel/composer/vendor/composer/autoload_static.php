@@ -9,9 +9,16 @@ class ComposerStaticInit7f8c75b184a82490ffa3403d197c2abc
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         'a9ed0d27b5a698798a89181429f162c5' => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib/Common/customFunctions.php',
+        '2b48d7ae311681a0234ee91e4baee565' => __DIR__ . '/..' . '/xiaohigh/pscws4/src/pscws4.class.php',
+        '337e4a32c4f339e498df5d75fd691d1c' => __DIR__ . '/..' . '/xiaohigh/pscws4/src/xdb_r.class.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'x' => 
+        array (
+            'xiaohigh\\Pscws4\\' => 16,
+            'xiaohigh\\' => 9,
+        ),
         'Z' => 
         array (
             'Zxing\\' => 6,
@@ -22,10 +29,15 @@ class ComposerStaticInit7f8c75b184a82490ffa3403d197c2abc
             'Symfony\\Component\\PropertyAccess\\' => 33,
             'Symfony\\Component\\OptionsResolver\\' => 34,
             'Symfony\\Component\\Inflector\\' => 28,
+            'Symfony\\Component\\Finder\\' => 25,
         ),
         'M' => 
         array (
             'MyCLabs\\Enum\\' => 13,
+        ),
+        'G' => 
+        array (
+            'Gregwar\\' => 8,
         ),
         'E' => 
         array (
@@ -34,6 +46,14 @@ class ComposerStaticInit7f8c75b184a82490ffa3403d197c2abc
     );
 
     public static $prefixDirsPsr4 = array (
+        'xiaohigh\\Pscws4\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/xiaohigh/pscws4/src',
+        ),
+        'xiaohigh\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/xiaohigh/curl/src',
+        ),
         'Zxing\\' => 
         array (
             0 => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib',
@@ -54,9 +74,17 @@ class ComposerStaticInit7f8c75b184a82490ffa3403d197c2abc
         array (
             0 => __DIR__ . '/..' . '/symfony/inflector',
         ),
+        'Symfony\\Component\\Finder\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/finder',
+        ),
         'MyCLabs\\Enum\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
+        ),
+        'Gregwar\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gregwar/captcha/src/Gregwar',
         ),
         'Endroid\\QrCode\\' => 
         array (

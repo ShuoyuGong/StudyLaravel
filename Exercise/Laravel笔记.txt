@@ -172,8 +172,8 @@
 4.基本使用
   a.在指定文件夹下创建Composer.json，填写相关的配置代码
     {
-      "require":{
-        "davidnineroc / qrcodeplus" : "1.0.0"
+      "require": {
+        "endroid/qr-code": "3.2.4"
       }
     }
   b.在命令行下执行composer install
@@ -181,6 +181,37 @@
   c.创建PHP脚本，并且要引入vendor文件夹下的autoload.php
   d.查看文档，使用工具包
 5.更新Composer.json文件
-
+  a.修改文件
+    {
+      "require": {
+        "endroid/qr-code": "3.2.4",
+        "xiaohigh/curl": "1.0"
+      }
+    }
+  b.更新
+    composer update
 6.软件更新
+  composer self-update
+7.Laravel
+  a.简介
+  b.运行环境要求
+    1.PHP版本>=5.5.9
+    2.Mcrypt PHP扩展
+      PHP加密扩展，提供多种加密算法
+    3.OpenSSL扩展
+      对数据传输进行加密
+    4.MBstring
+      提供了针对多字符串不同类型的字符的截取的支持
+    5.Tokenizer PHP扩展
+      PHP代码解析
+  c.安装
+    1.composer create-project laravel/laravel your-project-name --prefer-dist "5.1.*"
+        命令   命令(创建项目)     包的名称        你的文件夹名称        优先的版本
+    2.
+  d.配置
+  e.路由
+  f.中间件
+  g.控制器
+  h.请求
+  i.
 

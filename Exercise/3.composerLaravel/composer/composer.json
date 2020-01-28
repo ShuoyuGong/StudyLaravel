@@ -1,5 +1,8 @@
 {
   "require": {
-    "endroid/qr-code": "3.2.4"
+    "endroid/qr-code": "3.2.4",
+    "xiaohigh/curl": "1.0",
+    "gregwar/captcha": "1.*",
+    "xiaohigh/pscws4": "v1.0"
   }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c6a628724c326f9a33c7e088a0de1b8",
+    "content-hash": "077f78654f72a05acc6eb722b6668b14",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -116,6 +116,59 @@
             "time": "2018-02-09T21:53:50+00:00"
         },
         {
+            "name": "gregwar/captcha",
+            "version": "v1.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Gregwar/Captcha.git",
+                "reference": "6088ad3db59bc226423ad1476a9f0424b19b1866"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/6088ad3db59bc226423ad1476a9f0424b19b1866",
+                "reference": "6088ad3db59bc226423ad1476a9f0424b19b1866",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0",
+                "symfony/finder": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "captcha",
+            "autoload": {
+                "psr-4": {
+                    "Gregwar\\": "src/Gregwar"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Passault",
+                    "email": "g.passault@gmail.com",
+                    "homepage": "http://www.gregwar.com/"
+                },
+                {
+                    "name": "Jeremy Livingston",
+                    "email": "jeremy.j.livingston@gmail.com"
+                }
+            ],
+            "description": "Captcha generator",
+            "homepage": "https://github.com/Gregwar/Captcha",
+            "keywords": [
+                "bot",
+                "captcha",
+                "spam"
+            ],
+            "time": "2020-01-22T14:54:02+00:00"
+        },
+        {
             "name": "khanamiryan/qrcode-detector-decoder",
             "version": "1.0.2",
             "source": {
@@ -209,6 +262,55 @@
                 "enum"
             ],
             "time": "2019-08-19T13:53:00+00:00"
+        },
+        {
+            "name": "symfony/finder",
+            "version": "v4.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/finder.git",
+                "reference": "3a50be43515590faf812fbd7708200aabc327ec3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/3a50be43515590faf812fbd7708200aabc327ec3",
+                "reference": "3a50be43515590faf812fbd7708200aabc327ec3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Finder\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Finder Component",
+            "homepage": "https://symfony.com",
+            "time": "2020-01-04T13:00:46+00:00"
         },
         {
             "name": "symfony/inflector",
@@ -446,6 +548,76 @@
                 "reflection"
             ],
             "time": "2020-01-04T13:00:46+00:00"
+        },
+        {
+            "name": "xiaohigh/curl",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xiaohigh/curl.git",
+                "reference": "b30a20c5909a3bcbbe1195ad449505a122a4456c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xiaohigh/curl/zipball/b30a20c5909a3bcbbe1195ad449505a122a4456c",
+                "reference": "b30a20c5909a3bcbbe1195ad449505a122a4456c",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "xiaohigh\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "xiaohigh",
+                    "email": "xiaohigh@163.com"
+                }
+            ],
+            "description": "封装好的一个curl类,用来在php脚本中,发送get请求和post请求",
+            "time": "2016-07-24T13:07:46+00:00"
+        },
+        {
+            "name": "xiaohigh/pscws4",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xiaohigh/pscws4.git",
+                "reference": "ee276603a59b792cc26e752fbdc0f06c8a131987"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xiaohigh/pscws4/zipball/ee276603a59b792cc26e752fbdc0f06c8a131987",
+                "reference": "ee276603a59b792cc26e752fbdc0f06c8a131987",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "xiaohigh\\Pscws4\\": "./src"
+                },
+                "files": [
+                    "./src/pscws4.class.php",
+                    "./src/xdb_r.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "xiaohigh",
+                    "email": "xiaohigh@163.com"
+                }
+            ],
+            "description": "借助开源免费分词系统pscws4,实现一个简单的php分词类文件,方便进行中文分词",
+            "time": "2016-07-17T13:42:28+00:00"
         }
     ],
     "packages-dev": [],
