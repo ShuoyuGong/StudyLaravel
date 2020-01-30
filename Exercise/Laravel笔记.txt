@@ -209,7 +209,61 @@
         命令   命令(创建项目)     包的名称        你的文件夹名称        优先的版本
     2.
   d.配置
-  e.路由
+
+
+  *********************************第四节*Laravel基础之路由********************************
+  0.什么是路由
+    路由是有信息从源地址传递到目的地的作用
+  1.文件位置
+    app/Http/routes.php
+  2.基本路由
+    a.get请求
+      Route::get('/test', function(){
+        echo "这是一个测试路径";
+      });
+    b.post请求
+      Route::post('/add',function(){
+        // echo "这是一个添加操作";
+        return view('add');
+      });
+    c.报错信息
+      1.MethodNotAllowedHttpException in RouteCollection.php line 218:
+        说明当前的请求方式和路由规则滴滴请求方式不匹配
+      2.TokenMismatchException in VerifyCsrfToken.php line 53:
+        当前post请求中缺少验证信息，需要在每一个post请求的form表单中添加一个隐藏域来完成请求
+    d.Laravel框架中所有的模版文件都是放在 resources/views 文件夹中
+    e.Laravel框架中模版的后缀名是 .blade.php
+  3.带参数的路由
+
+  4.传递多个参数
+
+  5.路由别名
+
+  6.路由组的设置
+
+  7.404页面设置
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   f.中间件
   g.控制器
   h.请求
