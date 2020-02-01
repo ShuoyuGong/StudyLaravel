@@ -36,3 +36,28 @@ Route::get('/form',function(){
   return view('form');
 });
 
+// 模拟put请求
+Route::get('/put',function(){
+  return view('put');
+});
+
+Route::put('/update',function(){
+  $username = $_POST["username"];
+  $password = $_POST["pwd"];
+  echo "用户名是：".$username."<br>"."密码是：".$password;
+});
+
+// 带参数的路由
+Route::get('/article/{id}',function($id){
+  echo "ID值为".$id;
+});
+
+// 限制参数的类型
+Route::get('/goods/{id}',function($id){
+  echo "商品的ID为".$id;
+})->where('id','\d+');
+
+// 传递多个参数
+Route::get('/values/{type}-{id}',function($type,$id){
+  echo "商品的类型为".$type."商品ID为".$id;
+})->where('id','\d+');

@@ -231,9 +231,83 @@
         说明当前的请求方式和路由规则滴滴请求方式不匹配
       2.TokenMismatchException in VerifyCsrfToken.php line 53:
         当前post请求中缺少验证信息，需要在每一个post请求的form表单中添加一个隐藏域来完成请求
+      3.NotFoundHttpException in RouteCollection.php line 161:
+        说明路由规则没有能匹配到请求路径
     d.Laravel框架中所有的模版文件都是放在 resources/views 文件夹中
     e.Laravel框架中模版的后缀名是 .blade.php
-  3.带参数的路由
+    f.模拟put和delete请求
+      1.PUT
+        Route::get('/put',function(){
+          return view('put');
+        });
+
+        Route::put('/update',function(){
+          $username = $_POST["username"];
+          $password = $_POST["pwd"];
+          echo "用户名是：".$username."<br>"."密码是：".$password;
+        });
+
+        <form action="/update" method="post">
+          <input type="hidden" name = "_method" value="PUT">
+          用户名：<input type="text" name="username"><br>
+          密码：<input type="password" name="pwd"><br>
+          <button>点击提交</button><br>
+          {{csrf_field()}}
+        </form>
+      2.DELETE
+        Route::get('/delete',function(){
+          return view('put');
+        });
+
+        Route::put('/update',function(){
+          $username = $_POST["username"];
+          $password = $_POST["pwd"];
+          echo "用户名是：".$username."<br>"."密码是：".$password;
+        });
+
+        <form action="/update" method="post">
+          <input type="hidden" name = "_method" value="DELETE">
+          用户名：<input type="text" name="username"><br>
+          密码：<input type="password" name="pwd"><br>
+          <button>点击提交</button><br>
+          {{csrf_field()}}
+        </form>
+    g.带参数的路由
+      Route::get('/article/{id}',function($id){
+        echo "ID值为".$id;
+      });
+
+    h.限制参数的类型
+      Route::get('/goods/{id}',function($id){
+        echo "商品的ID为".$id;
+      })->where('id','\d+');
+    i.传递多个参数
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  3.
 
   4.传递多个参数
 
