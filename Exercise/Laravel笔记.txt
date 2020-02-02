@@ -281,7 +281,10 @@
       Route::get('/goods/{id}',function($id){
         echo "商品的ID为".$id;
       })->where('id','\d+');
-    i.传递多个参数
+    i.传递多个参数(并限制ID的值只能为数字)
+      Route::get('/values/{type}-{id}',function($type,$id){
+        echo "商品的类型为".$type."商品ID为".$id;
+      })->where('id','\d+');
 
 
 
