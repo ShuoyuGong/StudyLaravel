@@ -285,8 +285,59 @@
       Route::get('/values/{type}-{id}',function($type,$id){
         echo "商品的类型为".$type."商品ID为".$id;
       })->where('id','\d+');
+    j.路由别名
+      Route::get('/otherName',[
+          'as'=>'on',
+          'uses'=>function(){
+            echo "这是路由别名".route('on'); //route是一个函数，通过路由别名来快速创建完整的url
+          }
+      ]);
+    k.路由组的设置
+      Route::group([],function(){
+        // 将路由设置放在路由组中，例如前台路由组，后台路由组，可以为每一个路由组设置不通的权限以及方法
+      });
+    l.404页面设置
 
 
+*********************************第五节*Laravel基础之中间件********************************
+1.创建(默认不直接生效)
+  a.cmd命令行到Laravel框架的根目录并执行：
+    php artisan make:middleware TestMiddleware
+                创建   中间件       中间件名字
+  b.中间件默认存放目录
+    E:\wamp64\www\StudyLaravel\Laravel\app\Http\Middleware
+2.示例代码
+  public function handle($request, Closure $next)
+    {
+        // 记录该请求路径
+        $path = $request-> path();
+        // 将信息记录在日志中
+        file_put_contens('request.log',$path);
+        // 进入到下一层中间件代码执行
+        return $next($request);
+    }
+3.注册
+  a.全局注册
+    1.把所有的路由规则都执行这个中间件
+    2.将中间件的命名空间 + \ + ：：calss的形式添加到Kernel.php文件的$middleware方法中
+      // 全局路由注册示例
+      \App\Http\Middleware\LoginMiddleware::class,
+    3.$request是Laravel框架对请求报文的封装。
+  b.路由注册
+    1.把部分路由执行这个中间件 
+    2.将中间件的命名空间 + \ + ：：calss的形式添加到Kernel.php文件的$routeMiddleware方法中
+    3.路由注册示例
+        'login' => \App\Http\Middleware\LoginResMiddleware::class,
+         别名
+
+*********************************第六节*Laravel基础之控制器********************************
+1.
+
+2.
+
+3.
+
+4.
 
 
 

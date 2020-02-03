@@ -61,3 +61,34 @@ Route::get('/goods/{id}',function($id){
 Route::get('/values/{type}-{id}',function($type,$id){
   echo "商品的类型为".$type."商品ID为".$id;
 })->where('id','\d+');
+
+// 路由别名
+Route::get('/otherName',[
+    'as'=>'on',
+    'uses'=>function(){
+      echo "这是路由别名".route('on'); //route是一个函数，通过路由别名来快速创建完整的url
+    }
+]);
+
+// 路由组的设置
+Route::group([],function(){
+  // 将路由设置放在路由组中，例如前台路由组，后台路由组，可以为每一个路由组设置不通的权限以及方法
+});
+
+// 404页面设置
+Route::get('/404',function(){
+  abort(404);
+});
+
+// 用户登陆页面展示
+Route::get('/login',function(){
+  echo '这是用户的登陆界面';
+});
+
+// 设置页面
+Route::get('/setting',[
+  'middleware' => 'login',
+  'uses' => function(){
+    echo '这是网站的设置界面';
+  }
+]);
