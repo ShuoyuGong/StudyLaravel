@@ -11,9 +11,9 @@
 */
 
 Route::get('/', function () {
-  $a = "我是GSY";
-  return $a;
-  // return view('welcome');
+  // $a = "我是GSY";
+  // return $a;
+  return view('welcome');
 });
 
 Route::get('/test', function(){
@@ -31,10 +31,10 @@ Route::post('/add',function(){
   echo "用户名是：".$username."<br>"."密码是：".$password;
 });
 
-Route::get('/form',function(){
-  // echo "这是一个添加操作";
-  return view('form');
-});
+// Route::get('/form',function(){
+//   // echo "这是一个添加操作";
+//   return view('form');
+// });
 
 // 模拟put请求
 Route::get('/put',function(){
@@ -48,9 +48,9 @@ Route::put('/update',function(){
 });
 
 // 带参数的路由
-Route::get('/article/{id}',function($id){
-  echo "ID值为".$id;
-});
+// Route::get('/article/{id}',function($id){
+//   echo "ID值为".$id;
+// });
 
 // 限制参数的类型
 Route::get('/goods/{id}',function($id){
@@ -92,3 +92,67 @@ Route::get('/setting',[
     echo '这是网站的设置界面';
   }
 ]);
+
+// 写入session uid值
+Route::get('session',function(){
+  session(['uid'=>10]);
+});
+
+// 清除session uid值
+Route::get('session',function(){
+  session(['uid'=>'']);
+});
+
+// 当用户请求服务器上的/controller路径时，会执行UserController控制器文件中的show方法
+Route::get('/controller','UserController@show');
+
+// 带参数访问
+Route::get('/user/update/{id}','UserController@update');
+
+// 后台用户的删除操作
+Route::get('/user/delete/{id}',[
+  'as'=>'Udelete',
+  'uses'=>'UserController@delete'
+]);
+
+// 中间件控制 控制器方法 用户的升级
+Route::get('/user/shengji',[
+  'middleware'=>'login',
+  'uses'=>'UserController@shengji'
+]);
+
+// 中间件控制 控制器方法 用户禁用
+Route::get('/user/jinyong','UserController@jinyong')->middleware('login');
+
+
+
+// 隐式控制器
+// 如果是goods开头的访问路径 都交由GoodsController来处理
+Route::controller('goods','GoodsController');
+
+// restful控制器
+Route::resource('article','ArticleController');
+
+
+// *********************************第七节*Laravel基础之请求********************************
+Route::get('/request','UserController@qingqiu');
+
+Route::get('/user-form','UserController@form');
+
+Route::post('/form','UserController@insert');
+
+Route::get('/files','UserController@filesShow');
+
+Route::post('/upload','UserController@filesUpload');
+
+Route::get('/cookie','UserController@cookie');
+
+Route::get('/flash','UserController@showFlash');
+
+Route::post('/flash','UserController@doFlash');
+
+Route::get('/old','UserController@old');
+
+Route::get('/sessionFlash','UserController@sessionFlash');
+
+Route::get('/readFlash','UserController@readFlash');

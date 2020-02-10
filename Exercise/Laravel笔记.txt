@@ -331,13 +331,103 @@
          别名
 
 *********************************第六节*Laravel基础之控制器********************************
-1.
-发生都发生的费
-2.
+1.创建控制器
+  a.使用默认的方法
+    php artisan make:controller UserController
+  b.创建一个纯净的类，不使用默认方法
+    php article make:controller UserController --plain
+2.路由以及访问
+  a.普通访问
+    Route::get('/controller','UserController@show');
+  b.带参数访问  
+    Route::get('/user/update/{id}','UserController@update');
+  c.别名
+    Route::get('/user/delete/{id}',[
+      'as'=>'Udelete',
+      'uses'=>'UserController@delete'
+    ]);
+3.中间件控制
+  a.数组方式
+    Route::get('/user/shengji',[
+      'middleware'=>'login',
+      'uses'=>'UserController@shengji'
+    ]);
+  b.直接使用方法方式
+    Route::get('/user/jinyong','UserController@jinyong')->middleware('login');
+4.隐式控制器
+  a.特性
+    设置一个规则可以让n个路由去执行
+  b.使用方式
+    1.创建路由规则
+      Route::controller('goods','GoodsController');
+    2.GET /goods/add HTTP/1.1
+      这时会执行GoodsController下的getAdd方法
+      POST /goods/insert HTTP/1.1
+      这时会执行GoodsController下的postInsert方法
+5.restful控制器
+  请求方式	      URI路径	            控制器方法	    路由名称
+    GET	        /posts	              index	      posts.index
+    GET	        /posts/create	        create	    posts.create
+    POST	      /posts	              store	      posts.store
+    GET	        /posts/{post}	        show	      posts.show
+    GET	        /posts/{post}/edit	  edit	      posts.edit
+    PUT/PATCH	  /posts/{post}	        update	    posts.update
+    DELETE	    /posts/{post}	        destroy	    posts.destroy
 
-3.
+6.错误信息
+  a.Method [show] does not exist
+    当前控制器下没有声明该方法
 
-4.
+*********************************第七节*Laravel基础之请求********************************
+1.基本信息获取
+  a.获取请求方法
+    $request->method();
+  b.检测方法
+    $request->isMethod();
+  c.请求路径
+    $request->path();
+  d.获取ip
+    $request->ip();
+  e.获取完整的url
+    $request->url();
+  f.获取端口
+    $request->getProt();
+2.提取请求参数
+  a.基本获取
+    $data = $request->input('name');
+  b.设置默认值
+    $data = $request->input('name','Saily');
+  c.检测是否存在
+    $isData = $request->has('name');
+  d.提取所有参数
+    $data = $request->all();
+  e.提取部分参数
+    1.$data = $request->only(['username','password']);
+    2.$data = $request->except(['sex','address']);
+  f.获取头信息
+    $request->header('Connection');
+3.文件操作
+  a.检测是否有文件上传
+    $res = $request->hasFile('photo');
+  b.将文件移动到指定位置
+    $res = $request->file('photo')->move('./uploads/','iloveyou.jpg');
+4.cookie操作
+   a.写入cookie
+    1.\Cookie::queue('name','iloveyou',10);
+                      键名     值      声明周期(时间为分钟)
+    2.return response('haha')->withCookie('uid',10,10);
+   b.读取cookie
+    1.$res = \Cookie::get('username');
+    2.$res = $request->cookie('username');
+5.闪存信息
+  a.将所有请求参数写入闪存中
+    $request->flash();
+  b.将部分参数写入内存中
+    $request->flashOnly('name','sex');
+  c.除去某些参数之外的参数
+    $request->flash->flashExcept('_token');
+  d.自定义闪存
+    \Session::flash('name','gsy');
 
 
 
@@ -354,46 +444,4 @@
 
 
 
-
-
-
-
-
-
-
-  3.
-
-  4.传递多个参数
-
-  5.路由别名
-
-  6.路由组的设置
-
-  7.404页面设置
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  f.中间件
-  g.控制器
-  h.请求
-  i.
 
