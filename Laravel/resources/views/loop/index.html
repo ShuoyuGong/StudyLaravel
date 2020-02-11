@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  @for($i=1;$i<=100;$i++) {{$i}} @endfor <hr>
+    <table>
+      <tr>
+        <td>姓名：</td>
+        <td>性别：</td>
+        <td>手机号：</td>
+        <td>地址：</td>
+      </tr>
+      <tr>
+        @foreach($info as $info)
+      <tr>
+        <td >{{$info['name']}}</td>
+        <td>{{$info['sex']}}</td>
+        <td>{{$info['phoneNum']}}</td>
+        <td>{{$info['address']}}</td>
+      </tr>
+      @endforeach
+      </tr>
+    </table>
+
+</body>
+
+</html>

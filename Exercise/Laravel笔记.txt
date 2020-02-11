@@ -429,6 +429,73 @@
   d.自定义闪存
     \Session::flash('name','gsy');
 
+ 
+************************************第八节*Laravel响应*************************************
+1.返回字符串
+  return '哈哈哈';
+2.设置cookie
+  return response('')->withCookie('id',20,30);
+3.返回json
+  return response()->json(['a'=>100,'b'=>2000]);
+4.下载文件
+  return response()->download('web.config');
+5.页面跳转
+  return redirect('/goods/add');
+6.显示模版
+  return response()->view('goods.add');
+7.设置响应头
+  return response('')->header('name'=>'gsy');
+
+
+************************************第八(九)节*Laravel视图*************************************
+1.解析模版
+  view('user.add');
+2.分配数据到模版
+  view('user.edit',['username'=>'admin']);
+3.模版引擎blade
+  a.模版的默认存放位置
+    resources/views
+  b.使用变量
+    {{$username}}
+  c.使用函数
+    {{time()}}
+  d.设置默认值
+    {{$username or 'guest'}}
+  e.显示html代码
+    {!!$name!!}
+  f.引入子视图
+    @include('header')
+  g.模版继承
+    1.占位符
+      a.@yield('title')
+      b.@section('contend')
+          ......
+        @show
+    2.新模板内容
+      a.@extends('index')
+      b.@section('title','new Title')
+      c.@section('contend')
+          new contends is here
+        @endsection
+  h.流程控制
+    @if(count($records) === 1)
+      I have one record!
+    @elseif(count($records) >　1)
+      I have multiple records
+    @else
+      I don't have any records!
+    @endif
+  i.循环控制
+    1.@for each ($users as $user)
+        <p>THIS IS {{$user->id}}</p>
+      @endfor each
+    2.@for ($i = 0;$i < 10;$i++)
+        The current valu is {{&i}}
+      @endfor
+
+
+
+
 
 
 
