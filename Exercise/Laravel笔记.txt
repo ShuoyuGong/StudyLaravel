@@ -493,7 +493,174 @@
         The current valu is {{&i}}
       @endfor
 
+************************************第十节*Laravel数据库基本操作*************************************
+1.支持的数据库类型
+  a.MySQl
+  b.Postgres
+  c.SQLite
+  d.SQL Server
+2.数据库连接配置
+  a.文件位置
+    config/database.php
+  b.结果的返回类型
+    'fetch' => PDO::FETCH_ASSOC
+  c./.env环境快速配置
+3.数据库基本操作
+  a.查询
+    DB::select
+  b.插入
+    DB::insert
+  c.更新
+    DB::update
+  d.删除
+    DB::delete
+  e.一般语句
+    DB::statment('drop table user1');
+  f.事务操作
+    1.开启事务
+      DB:：beginTransaction();
+    2.事务回滚
+      DB::rollBack();
+    3.
+  g.操作多个数据库
+    DB::connection('foo')->select(...);
+4.构造器
+  a.增删改查
+     1.插入
+      a.单条
+        DB::table('user_info')->insert(
+          [
+            'id'      =>  null,
+            'name'    =>  'gsy',
+            'sex'     =>  '男',
+          ]
+        );
+      b.多条
+        DB::table('user_info')->insert(
+          [
+            'id'      =>  null,
+            'name'    =>  'gsy',
+            'sex'     =>  '男',
+          ],
+          [
+            'id'      =>  null,
+            'name'    =>  'gsy',
+            'sex'     =>  '女',
+          ],
+        );
+      c.获取ID插入
+        $id = DB::table('user_info')->insertGetId(
+          [
+            'id'      =>  null,
+            'name'    =>  'gsy',
+            'sex'     =>  '男',
+          ]
+        );
+     2.更新
+      DB::table('user_info')
+        ->where('id',1)
+        ->update(['name' =>　'gsy']);
+     3.删除
+      DB::table('user_info')
+        ->where('name','<',20)
+        ->delete();
+     4.查询
+      1.查询所有
+        DB::table('user_info')->get();
+      2.查询单条
+         DB::table('user_info')->first();
+      3.查询单条结果中的某个字段
+         DB::table('user_info')->value('username');
+      4.获取一列数据
+        DB::table('user_info')->lists('username');
+  b.连贯操作
+    1.设置字段
+      DB::table('user_info')->select('name','email as user_email')->get();
+    2.条件
+      a.Where和orWhere
+        DB::table('user_info')
+          ->select("name", "sex")
+          ->where('id', '>', 10)
+          ->orWhere('id', '=', 1)
+          ->get();
+      b.whereBetween
+        DB::table('user_info')
+          ->whereBetween('id', [5, 10])
+          ->get();
+      c.whereIn
+        DB::table('user_info')
+          ->whereIn('id', [5, 10])
+          ->get();
+    3.排序
+       $res = DB::table('user_info')
+        ->orderBy('id', 'desc')
+        ->get();
+    4.分页
+      Db::table('user_info')->skip(10)->take(5)->get();
+    5.连接表
+      DB::table('user_info')
+        ->join('contacts')
+    6.计算
+      a.总数
+        DB::table('user_info)->count();
+      b.最大值
+        DB::table('shop_info')->max('price');
+      c.平均值
+        DB::table('shop_info')->avg('price');
 
+5.sql语句记录(放至路由文件中)
+  Event::listen('illuminate.query',function($query){
+    dd($query);
+  });
+
+************************************第十一节*Laravel数据库迁移*************************************
+1.简介
+  Laravel框架管理数据库结构的一种方式
+2.实用
+  a.创建类文件
+    php artisan make:migration test
+  b.up方法
+    1.创建表
+      Schema::create('users',function(Blueprint $table){})
+    2.创建表字段
+      a.字段类型
+        1.主键字段
+          $table->increments('id');
+        2.字符串字段
+          $table->string('username');
+        3.整形
+          $table->integer('age');
+        4.浮点型
+          $table->float('weight');
+        5.文本类型
+          $table->text('intro');
+      b.字段修饰
+        1.nullable
+        2.default
+        3.unsigned
+        4.comment
+      c.索引
+        1.主键
+          $table->primary('id');
+        2.一般索引
+          $table->index('password');
+        3.唯一索引
+          $table->unique('username');
+    3.设置引擎
+    $table->engine = "innodb";
+  c.down方法
+    Schema::drop('users');
+  d.命令
+    1.php artisan migrate
+    2.php artisan migrate:refresh
+  e.记录表结构的变化
+    1.检测表是否存在
+      Schema::hasTable('gsy');
+    2.检测表中的字段是否存在
+      Schema::hasColumn()
+    3.增加字段
+    4.修改字段
+    5.索引操作
 
 
 

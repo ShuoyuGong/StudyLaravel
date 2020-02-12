@@ -10,6 +10,14 @@
 |
 */
 
+
+/**
+ *监听SQL语句，并打印至页面 
+ */
+// Event::listen('illuminate.query', function ($query) {
+//   var_dump($query);
+// });
+
 Route::get('/', function () {
   // $a = "我是GSY";
   // return $a;
@@ -179,3 +187,33 @@ Route::get('/process', 'UserController@process');
 
 // 循环控制
 Route::get('/loop', 'UserController@loop');
+
+
+// ************************************第十节*Laravel数据库基本操作*******************************
+Route::get('/db', 'DbController@index');
+// 查询数据
+Route::get('/dbSelect', 'DbController@select');
+// 显示查询数据表单页面
+Route::get('dbInsertIndex', 'DbController@insertIndex');
+// 查询数据
+Route::post('/dbInsert', 'DbController@insert');
+// 修改数据
+Route::get('/dbUpdate', 'DbController@update');
+// 删除数据
+Route::get('/dbDelete', 'DbController@delete');
+// 一般语句
+Route::get('/dbStatement', 'DbController@statement');
+// 事务操作
+Route::get('/dbShiwu', 'DbController@shiwu');
+// 多个数据库操作
+Route::get('/dbs', 'DbController@dbs');
+// 查询构造器
+Route::get('/dbInsertStructure', 'DbController@insertStructure');
+// 更新构造器
+Route::get('/dbUpdateStructure', 'DbController@updateStructure');
+// 删除构造器
+Route::get('/dbDeleteStructrue', 'DbController@deleteStructure');
+// 查询构造器
+Route::get('/dbSelectStructure', 'DbController@selectStructure');
+// 连贯操作
+Route::get('/dbCoherent', 'DbController@coherent');
