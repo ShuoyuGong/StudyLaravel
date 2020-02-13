@@ -37,12 +37,9 @@ class Test extends Migration
     } else {
       // 如果表存在的话 调整表结构
       Schema::table('gsy', function (Blueprint $table) {
-        if (!Schema::hasColumn('gsy', 'text')) {
-          $table->tinyInteger('text')->comment('个人介绍');
+        if (!Schema::hasColumn('gsy', 'love')) {
+          $table->string('love');
         }
-        // if (!Schema::hasColumn('gsy', 'interesting')) {
-        //   $table->string('interesting')->comment('有趣');
-        // }
       });
     }
   }
