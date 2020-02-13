@@ -6,6 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 class Test extends Migration
 {
+
+  /**
+   * GSY 2020年2月13日 
+   * 检测表中字段是否设置了索引
+   * $table 表名
+   * $name Laravel默认生成的键名
+   */
+  public function hasIndex($table, $name)
+  {
+    $conn = Schema::getConnection();
+    $dbSchemaManager = $conn->getDoctrineSchemaManager();
+    $doctrineTable = $dbSchemaManager->listTableDetails($table);
+    return $doctrineTable->hasIndex($name);
+  }
   /**
    * Run the migrations.
    *
@@ -37,11 +51,29 @@ class Test extends Migration
     } else {
       // 如果表存在的话 调整表结构
       Schema::table('gsy', function (Blueprint $table) {
-        if (!Schema::hasColumn('gsy', 'text')) {
-          $table->tinyInteger('text')->comment('个人介绍');
+        if (!Schema::hasColumn('gsy', 'sex')) {
+          $table->char('sex', 3)->nullable();
         }
-        // if (!Schema::hasColumn('gsy', 'interesting')) {
-        //   $table->string('interesting')->comment('有趣');
+
+        //删除主键索引
+        // if ($this->hasIndex('gsy', 'gsy_id_primary')) {
+        //   $table->dropPrimary('gsy_id_primary');
+        // }
+
+        // 修改字段
+        // $table->string('email')->change();
+
+        // 删除字段
+        // $table->dropColumn('sex');
+
+        // 删除唯一索引
+        // if ($this->hasIndex('gsy', 'gsy_username_unique')) {
+        //   $table->dropUnique('gsy_username_unique');
+        // }
+
+        // 删除普通索引
+        // if ($this->hasIndex('gsy', 'gsy_email_index')) {
+        //   $table->dropIndex('gsy_email_index');
         // }
       });
     }

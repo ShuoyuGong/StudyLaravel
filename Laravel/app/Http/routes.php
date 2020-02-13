@@ -217,3 +217,7 @@ Route::get('/dbDeleteStructrue', 'DbController@deleteStructure');
 Route::get('/dbSelectStructure', 'DbController@selectStructure');
 // 连贯操作
 Route::get('/dbCoherent', 'DbController@coherent');
+
+
+// *****************第十二节*Laravel数据库 数据填充 设置自定义函数(类)*******************************
+Route::get('/function', 'UserController@selfFunction');

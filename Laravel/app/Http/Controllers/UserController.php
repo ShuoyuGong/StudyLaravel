@@ -278,4 +278,11 @@ class UserController extends Controller
       'info' => $info,
     ]);
   }
+
+
+  // *****************第十二节*Laravel数据库 数据填充 设置自定义函数(类)*******************************
+  public function selfFunction()
+  {
+    echo love();
+  }
 }

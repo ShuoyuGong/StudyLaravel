@@ -657,11 +657,80 @@
     1.检测表是否存在
       Schema::hasTable('gsy');
     2.检测表中的字段是否存在
-      Schema::hasColumn()
+      Schema::hasColumn('gsy','sex')
     3.增加字段
+       Schema::table('gsy', function (Blueprint $table) {
+          if (!Schema::hasColumn('gsy', 'sex')) {
+            $table->timestamp('sex')->nullable();
+          }
+        });
     4.修改字段
+      a.$table->decimal('price',10,2)->change();
+      b.这里需要一个包
+        composer require doctrine/dbal
+    5.删除字段
+      $table->dropColumn('sex');
     5.索引操作
+      a.检测索引的方法
+        public function hasIndex($table ,$name){
+          $conn = Schema::getConnection();
+          $dbSchemaManager = $conn->getDoctrineSchemaManager();
+          $doctrineTable = $dbSchemaManager->listTableDetails($table);
+          return $doctrineTable->hasIndex($name);
+        }
+      b.$table->dropPrimary('id');
+      c.删除唯一索引
+        if ($this->hasIndex('gsy', 'gsy_username_unique')) {
+          $table->dropUnique('gsy_username_unique');
+        }
+      d .删除普通索引
+        if ($this->hasIndex('gsy', 'gsy_email_index')) {
+          $table->dropIndex('gsy_email_index');
+        }
+      e.删除主键索引
+        if ($this->hasIndex('gsy', 'gsy_id_primary')) {
+          $table->dropPrimary('gsy_id_primary');
+        }
+  
+***********************第十二节*Laravel数据库 数据填充 设置自定义函数(类)***********************
+1.简介
+  Laravel框架中一个快速向数据库表中插入测试数据的方法 
+2.使用
+  a.方法一：
+    1.创建注入文件(文件默认在database/seed中)
+      php artisan make:seeder user
+    2.在文件中填写注入代码
+    3.运行指令
+      php artisan db:seed --class=user
+  b.方法二:
+    1.创建注入文件
+    2.在文件中填写注入代码
+    3.在DatabaseSeeder文件中添加代码
+    4.运行指令
+      php artisan db:seed
+3.设置自定义函数和自定义类文件
+  a.app/library/hepler.php
+  b.在项目下的composer.json中添加"files"信息
+    "autoload": {
+      "classmap": [
+        "database"
+      ],
+      "psr-4": {
+        "App\\": "app/"
+      },
+      "files":{
+        "app/commen/function.php"
+      }
+    },
+  c.运行指令
+    composer dump-auto
+4.调试工具
+  a.debugbar安装
+    1.composer require barryvdh/laravel-debugbar
+    2.在config/app.php里面的providers添加Barryvdh\Debugbar\ServiceProvider::class,
+  b.chrome插件postman
 
+  
 
 
 
