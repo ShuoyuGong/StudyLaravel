@@ -18,11 +18,11 @@
 //   var_dump($query);
 // });
 
-Route::get('/', function () {
-  // $a = "我是GSY";
-  // return $a;
-  return view('welcome');
-});
+// Route::get('/', function () {
+//   $a = "我是GSY";
+//   return $a;
+//   // return view('welcome');
+// });
 
 Route::get('/test', function () {
   echo "这是一个测试路径";
