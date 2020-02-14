@@ -11,6 +11,80 @@
 |
 */
 
+// use Illuminate\Routing\Route;
+// 引入Request类
+use Illuminate\Http\Request;
+// 引入Route类
+use Illuminate\Support\Facades\Route;
+
+// Route::get('/', function () {
+//   return view('welcome');
+// });
+
+// Route::get('/testIndex', 'TestController@index');
+
+// Route::redirect('/abc', 'http://www.baidu.com', 301)->name('baidu');
+
+// Route::get('makeUrl', function () {
+//   echo url("testIndex");
+// });
+
+// // 视图路由
+// Route::view('/index', 'welcome');
+
+// // 路由参数
+// Route::get('/user/{id?}', function ($id = null) {
+//   dd($id);
+// })->where('id', '[0-9]*');
+
+// // 路由参数全局约束
+// Route::get('/user/all/{id}/{aid}', function (Request $request, $id = null, $aid) {
+//   dump($aid);
+//   dump(request()->id);
+//   dump(request()->aid);
+//   dd($request->id);
+// });
+
+
+// ******************后台路由组*********************************
+// Route::prefix('admin')->name('admin.')->group(function () {
+// 路由前缀
+// // 登陆
+// Route::get('login/{age}', function (Request $request) {
+//   dump($request->age);
+//   return '后台登陆';
+// })->middleware('CheckAge');
+
+// // 会员信息
+// Route::get('userInfo', function () {
+//   return '会员信息';
+// });
+// Route::get('testIndex', 'Admin\TestController@index');
+
+
+// 后台首页
+// Route::get('admin', 'Admin\IndexController@index');
+// });
+
+// Route::get('/home', function () {
+//   return "中间件没有通过！3秒后跳转至首页
+//   <script>
+//     setTimeout(function(){
+//       window.location.href='/';
+//     }, 3000)
+//   </script>";
+// });
+
+
+
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
+});
+
+// ************后台路由组************
+Route::prefix('admin')->name('admin.')->group(function () {
+  // 后台首页显示
+  Route::get('/', function () {
+    return view('admin/index/index');
+  })->name('index');
 });
