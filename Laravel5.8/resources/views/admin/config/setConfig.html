@@ -1,0 +1,106 @@
+@section('tittle','后台首页');
+@extends('admin.default');
+
+<!-- 引入右边布局 -->
+@section('contend')
+<div class="page-header">
+  <h3 class="page-title">
+    系统配置
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">系统配置</a></li>
+      <li class="breadcrumb-item active" aria-current="page">网站配置</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <!--显示表单验证的错误信息 -->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
+        <!-- 判断是否有闪存数据 -->
+        @if(session()->has('arrMsg'))
+        <div class="alert alert-{{session('arrMsg')['class']}}">
+          {{session('arrMsg')['msg']}}
+        </div>
+        @endif
+
+
+        <form class="forms-sample" action="{{route('admin.config.store')}}" method="post">
+          <input type="hidden" name="name" value="setConfig">
+          <input type="hidden" name="title" value="网站配置">
+          <div class="form-group">
+            <label for="exampleInputUsername1">网站名称</label>
+            <input type="text" value="{{isset($config->webName)?$config->webName:''}}" class="form-control"
+                   name="webName" placeholder="请输入网站名称">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">网站域名</label>
+            <input type="text" value="{{isset($config->webDomain)?$config->webDomain:''}}" class="form-control"
+                   name="webDomain" placeholder="请输入网站域名">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">网站关键字</label>
+            <input type="text" value="{{isset($config->webKeyWord)?$config->webKeyWord:''}}" class="form-control"
+                   name="webKeyWord" placeholder="请输入网站关键字">
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">网站描述</label>
+            <textarea class="form-control" name="webDescribe" rows="4"
+                      placeholder="请输入网站描述">{{isset($config->webDescribe)?$config->webDescribe:''}}</textarea>
+          </div>
+          <div class="form-group row col-12">
+            <label class="col-sm-2 col-form-label">网站状态</label>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <div class="form-check">
+                <label class="form-check-label">
+                  @if(isset($config->websiteStatus))
+                  <input type="radio" class="form-check-input" name="websiteStatus" id="membershipRadios1" value="1"
+                         {{($config->websiteStatus == 1)?'checked':''}}>
+                  @else
+                  <input type="radio" class="form-check-input" name="websiteStatus" id="membershipRadios1" value="1"
+                         checked>
+                  @endif
+                  运行
+                  <i class="input-helper"></i></label>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <div class="form-check">
+                <label class="form-check-label">
+                  @if(isset($config->websiteStatus))
+                  <input type="radio" class="form-check-input" name="websiteStatus" id="membershipRadios2" value="0"
+                         {{($config->websiteStatus == 0)?'checked':''}}>
+                  @else
+                  <input type="radio" class="form-check-input" name="websiteStatus" id="membershipRadios2" value="0">
+                  @endif
+                  关闭
+                  <i class="input-helper"></i></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleTextarea1">关站提示</label>
+            <textarea class="form-control" name="stationClosingHint" rows="4"
+                      placeholder="请输入关站提示信息">{{isset($config->stationClosingHint)?$config->stationClosingHint:''}}</textarea>
+          </div>
+          <button type="submit" class="btn btn-gradient-primary mr-2">保存</button>
+          @csrf
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

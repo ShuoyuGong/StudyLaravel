@@ -84,7 +84,14 @@ Route::get('/', function () {
 // ************后台路由组************
 Route::prefix('admin')->name('admin.')->group(function () {
   // 后台首页显示
-  Route::get('/', function () {
+  Route::get('/index', function () {
     return view('admin/index/index');
   })->name('index');
+
+  // ***********配置路由组************
+  Route::group(['prefix' => 'config'], function () {
+    Route::get('/setConfig', 'Admin\ConfigController@setConfig')->name('config.setConfig');
+    // 数据入库
+    Route::post('/store', 'Admin\ConfigController@store')->name('config.store');
+  });
 });
