@@ -1,0 +1,84 @@
+@section('tittle','添加新闻');
+@extends('admin.default');
+
+<!-- 引入右边布局 -->
+@section('contend')
+<div class="page-header">
+  <h3 class="page-title">
+    系统配置
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">系统配置</a></li>
+      <li class="breadcrumb-item active" aria-current="page">添加新闻</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <!--显示表单验证的错误信息 -->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
+        <form class="forms-sample" action="{{route('admin.news.store')}}" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="exampleInputUsername1">新闻标题</label>
+            <input type="text" class="form-control" name="title" placeholder="请输入新闻标题">
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">新闻关键字</label>
+            <input type="text" class="form-control" name="keyWord" placeholder="请输入新闻关键字">
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">浏览量</label>
+            <input type="text" class="form-control" value="0" name="views" placeholder="请输入新闻浏览量">
+          </div>
+          <div class="form-group">
+            <label>新闻图片</label>
+            <input type="file" name="picture" class="file-upload-default">
+            <div class="input-group col-xs-12">
+              <input type="text" class="form-control file-upload-info" disabled="" placeholder="新闻图片上传">
+              <span class="input-group-append">
+                <button class="file-upload-browse btn btn-gradient-primary" type="button">选择图片</button>
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">新闻描述</label>
+            <textarea class="form-control" name="describe" rows="4" placeholder="请输入新闻描述"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">新闻摘要</label>
+            <textarea class="form-control" name="abstract" rows="4" placeholder="请输入新闻摘要"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">新闻内容</label>
+            <textarea class="form-control" name="content" rows="4" placeholder="请输入关站提示信息" id="content"
+                      style="width: 100%; height: 350px;"></textarea>
+          </div>
+          <button type="submit" class="btn btn-gradient-primary mr-2">保存</button>
+          @csrf
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{{asset(__ADMIN__)}}/neditor/neditor.config.js"></script>
+<script src="{{asset(__ADMIN__)}}/neditor/neditor.all.min.js"></script>
+<script src="{{asset(__ADMIN__)}}/neditor/neditor.service.js"></script>
+<script>
+  // 实例化编辑器
+  var ue = UE.getEditor('content', {
+    autoHeight: false
+  });
+</script>
+@endsection

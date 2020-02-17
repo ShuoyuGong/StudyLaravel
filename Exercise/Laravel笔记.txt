@@ -730,6 +730,24 @@
     2.在config/app.php里面的providers添加Barryvdh\Debugbar\ServiceProvider::class,
   b.chrome插件postman
 
+**********************************************5.8*****************************************
+1.Laravel局部刷新
+  a.在html文件中引入pjax.js文件
+  b.根据ID rightContent 的a标签设置局部刷新,超过5秒全局刷新
+     $(document).pjax('a', '#rightContent', { timeout: 5000 })
+  c. 安装Laravel局部刷新依赖
+    composer require spatie/laravel-pjax
+  d.在中间件文件中添加全局中间件
+    \Spatie\Pjax\Middleware\FilterIfPjax::class,
+  e.体验效果增加(增加loading)
+    $(document).on('pjax.send',function(){
+      $('#loading').show();
+    })
+     $(document).on('pjax.complete',function(){
+      $('#loading').hide();
+    })
+
+
   
 
 

@@ -93,5 +93,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/setConfig', 'Admin\ConfigController@setConfig')->name('config.setConfig');
     // 数据入库
     Route::post('/store', 'Admin\ConfigController@store')->name('config.store');
+    // 基本信息配置界面
+    Route::get('/informationConfig', 'Admin\ConfigController@informationConfig')->name('config.informationConfig');
+    // 百度推送设置
+    Route::get('/baiduConfig', 'Admin\ConfigController@baiduConfig')->name('config.baiduConfig');
+    // *********新闻模块**********
+    Route::resource('/news', 'Admin\NewsController');
   });
 });

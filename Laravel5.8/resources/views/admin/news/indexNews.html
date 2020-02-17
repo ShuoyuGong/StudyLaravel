@@ -1,0 +1,60 @@
+@section('tittle','新闻管理');
+@extends('admin.default');
+
+<!-- 引入右边布局 -->
+@section('contend')
+<div class="page-header">
+  <h3 class="page-title">
+    新闻管理
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">新闻管理</a></li>
+      <li class="breadcrumb-item active" aria-current="page">新闻列表</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <!-- 判断是否有闪存数据 -->
+        @if(session()->has('arrMsg'))
+        <div class="alert alert-{{session('arrMsg')['class']}}">
+          {{session('arrMsg')['msg']}}
+        </div>
+        @endif
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr>
+              <th> ID</th>
+              <th> 标题</th>
+              <th> 浏览次数</th>
+              <th> 发布时间</th>
+              <th style="width: 150px;"> 操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($data as $item)
+            <tr>
+              <td>{{$item->id}}</td>
+              <td>{{$item->title}}</td>
+              <td>{{$item->views}}</td>
+              <td>{{$item->created_at}}</td>
+              <td>
+                <a href="#" class="btn btn-success btn-xs" role="button">编辑</a>
+                <a href="#" class="btn btn-danger btn-xs" role="button">删除</a>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+        <div style="padding: 10px 0px;">
+          {{$data->links()}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

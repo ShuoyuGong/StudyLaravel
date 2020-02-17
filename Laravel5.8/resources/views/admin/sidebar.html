@@ -27,21 +27,23 @@
   <div class="collapse" id="ui-basic">
     <ul class="nav flex-column sub-menu">
       <li class="nav-item"> <a class="nav-link" href="{{route('admin.config.setConfig')}}">网站配置</a></li>
-      <li class="nav-item"> <a class="nav-link" href="#">百度推送</a></li>
+      <li class="nav-item"> <a class="nav-link" href="{{route('admin.config.informationConfig')}}">基本信息</a>
+      </li>
+      <li class="nav-item"> <a class="nav-link" href="{{route('admin.config.baiduConfig')}}">百度推送</a></li>
     </ul>
   </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" data-toggle="collapse" href="#ui-articel" aria-expanded="false" aria-controls="ui-articel">
-    <span class="menu-title">文章管理</span>
+    <span class="menu-title">新闻管理</span>
     <i class="menu-arrow"></i>
     <i class="mdi mdi-contacts menu-icon"></i>
   </a>
   <div class="collapse" id="ui-articel">
     <ul class="nav flex-column sub-menu">
-      <li class="nav-item"> <a class="nav-link" href="/admin/articleList">文章列表</a>
+      <li class="nav-item"> <a class="nav-link" href="{{route('admin.news.index')}}">新闻列表</a>
       </li>
-      <li class="nav-item"> <a class="nav-link" href="javascript:;">文章分类</a></li>
+      <li class="nav-item"> <a class="nav-link" href="{{route('admin.news.create')}}">添加新闻</a></li>
     </ul>
   </div>
 </li>

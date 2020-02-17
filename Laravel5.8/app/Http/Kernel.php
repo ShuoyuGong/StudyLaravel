@@ -22,6 +22,8 @@ class Kernel extends HttpKernel
     \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     // 日志记录全局中间件
     \App\HTTP\Middleware\LogRecordMiddleware::class,
+    // pjax局部刷新中间件
+    \Spatie\Pjax\Middleware\FilterIfPjax::class,
   ];
 
   /**
