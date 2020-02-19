@@ -81,7 +81,7 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-// ************后台路由组************
+// ****************************************后台路由组**********************************************
 Route::prefix('admin')->name('admin.')->group(function () {
   // 后台首页显示
   Route::get('/index', function () {
@@ -97,7 +97,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/informationConfig', 'Admin\ConfigController@informationConfig')->name('config.informationConfig');
     // 百度推送设置
     Route::get('/baiduConfig', 'Admin\ConfigController@baiduConfig')->name('config.baiduConfig');
-    // *********新闻模块**********
-    Route::resource('/news', 'Admin\NewsController');
   });
+
+  // *********新闻模块**********
+  Route::resource('/news', 'Admin\NewsController')->except('destroy');
+  // 删除数据
+  Route::get('/admin/news/{news}/del', 'Admin\NewsController@destroy')->name('news.delete');
+  // editor图片上传接口
+  Route::post('/imgUpload', 'Admin\ToolsController@imgUploadTools')->name('imgUploadTools');
+
+  // ***********产品分类**************
+  Route::group(['prefix' => 'category'], function () {
+    // 分类列表 页面显示
+    Route::get('/index', 'Admin\CategoryController@index')->name('category.index');
+    // 添加分类 页面显示
+    Route::match(['get', 'post'], '/create', 'Admin\CategoryController@create')->name('category.create');
+    // 编辑分类
+    Route::match(['get', 'post'], '/edit/{cateID}', 'Admin\CategoryController@edit')->name('category.edit');
+    // 删除分类
+    Route::get('/destroy/{cateID}', 'Admin\CategoryController@destroy')->name('category.destroy');
+  });
+  // 产品管理----资源控制器
+  Route::resource('/product', 'Admin\ProductController');
+  // 产品管理首页删除功能
+  // Route::get('/destroy/{productId}', 'Admin\ProductController@destroy')->name('product.destroy');
 });

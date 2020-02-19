@@ -1,0 +1,62 @@
+@extends('admin.default');
+@section("title","无限级分类")
+@section("contend")
+<div class="page-header">
+  <h3 class="page-title">
+    无限级分类
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{route('admin.category.index')}}">无限级分类管理</a></li>
+      <li class="breadcrumb-item active" aria-current="page">编辑分类</li>
+    </ol>
+  </nav>
+</div>
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">
+          {{ $error }}
+        </div>
+        @endforeach
+        @endif
+
+        @if(session()->has("arrMsg"))
+        <div class="alert alert-{{session('arrMsg')['class']}}">
+          {{ session('arrMsg')['msg'] }}
+        </div>
+        @endif
+
+        <form class="forms-sample" action="? " method="post">
+          @csrf
+          <input type="hidden" name="id" id="id" value="{{$cateID->id}}">
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">上级分类</label>
+            <select class="form-control form-control-lg" id="categoryPid" name="categoryPid"
+                    id="exampleFormControlSelect1">
+              <option value="0">中国</option>
+              @foreach($cates as $item)
+              <option value="{{$item->id}}" {{($item->id==$cateID->pid)?'selected':''}}>
+                {{($item->level == 0)?'':'|'}}{{str_repeat('----',$item->level)}}{{$item->name}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="key">分类名称</label>
+            <input type="text" name="categoryName" class="form-control" value="{{$cateID->name}}" placeholder="请输入分类名称">
+          </div>
+          <div class="form-group">
+            <label for="key">排序</label>
+            <input type="text" name="categorySort" value="{{$cateID->sort}}" class="form-control" id="categorySort"
+                   placeholder="请输入分类排序">
+          </div>
+          <button type="submit" class="btn btn-gradient-primary mr-2">保存 </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

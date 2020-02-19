@@ -151,10 +151,16 @@
     <!-- End custom js for this page-->
     <!-- 引入pjax.js -->
     <script src="{{asset(__ADMIN__)}}/js/jquery.pjax.js"></script>
+    <!-- 引入富文本编辑器 Neditor 文件 -->
+    <script src="{{asset(__ADMIN__)}}/neditor/neditor.config.js"></script>
+    <script src="{{asset(__ADMIN__)}}/neditor/neditor.all.min.js"></script>
+    <script src="{{asset(__ADMIN__)}}/neditor/neditor.service.js"></script>
     <!-- 点击模版中的a标签实现局部刷新 -->
     <script>
-      $(document).pjax('a', '#rightContent', { timeout: 5000 });
+      $(document).pjax('a', '#rightContent', { timeout: 1500 });
       changeFilesUpload();
+      CheckBox();
+
       $(document).on('pjax:send', function () {
         $('#loadingLine').show();
       })
@@ -162,6 +168,7 @@
       $(document).on('pjax:complete', function () {
         $('#loadingLine').hide();;
         changeFilesUpload();
+        CheckBox();
       })
 
       // 引入美化后的按钮依赖的js文件
@@ -172,6 +179,23 @@
         });
         $('.file-upload-default').on('change', function () {
           $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+        });
+      }
+
+      /**
+       * 产品列表首页的 复选框 全选/全不选功能
+       * 路由为  admin.product.index
+      */
+      var countBtn = 0;
+      function CheckBox() {
+        $("#CheckBox").on('click', function () {
+          if (countBtn == 0) {
+            $('.checkBoxChild').prop('checked', 'checked');
+            countBtn = 1;
+          } else {
+            $('.checkBoxChild').prop('checked', false);
+            countBtn = 0;
+          }
         });
       }
     </script>

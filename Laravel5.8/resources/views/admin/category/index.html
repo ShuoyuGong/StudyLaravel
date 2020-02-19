@@ -1,16 +1,18 @@
-@section('tittle','新闻管理');
+@section('tittle','无限级分类');
 @extends('admin.default');
 
 <!-- 引入右边布局 -->
 @section('contend')
+
+
 <div class="page-header">
   <h3 class="page-title">
-    新闻管理
+    <a href="{{route('admin.category.create')}}" class="btn btn-success btn-xs">添加分类</a>
   </h3>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">新闻管理</a></li>
-      <li class="breadcrumb-item active" aria-current="page">新闻列表</li>
+      <li class="breadcrumb-item"><a href="{{route('admin.category.index')}}">无限级分类</a></li>
+      <li class="breadcrumb-item active" aria-current="page">分类列表</li>
     </ol>
   </nav>
 </div>
@@ -28,33 +30,29 @@
         <table class="table table-bordered text-center">
           <thead>
             <tr>
-              <th> ID</th>
-              <th> 标题</th>
-              <th> 浏览次数</th>
-              <th> 发布时间</th>
-              <th style="width: 150px;"> 操作</th>
+              <th style="width: 50px;"> ID</th>
+              <th style="width: 10em;"> 名称</th>
+              <th style="width: 10em;"> 排序 </th>
+              <th style="width: 10em;"> 操作</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($data as $item)
+            @foreach($categoryData as $item)
             <tr>
               <td>{{$item->id}}</td>
-              <td>{{$item->title}}</td>
-              <td>{{$item->views}}</td>
-              <td>{{$item->created_at}}</td>
+              <td class="text-left">{{($item->level == 0)?'':'|'}}{{str_repeat('----',$item->level)}}{{$item->name}}
+              </td>
+              <td>{{$item->sort}}</td>
               <td>
-                <a href="{{route('admin.news.edit',['news' => $item->id])}}" class="btn btn-success btn-xs"
+                <a href="{{route('admin.category.edit',['cateID' => $item->id])}}" class="btn btn-success btn-xs"
                    role="button">编辑</a>
-                <a href="{{route('admin.news.delete',['news' => $item->id])}}" class="btn btn-danger btn-xs"
+                <a href="{{route('admin.category.destroy',['cateID' => $item->id])}}" class="btn btn-danger btn-xs"
                    role="button">删除</a>
               </td>
             </tr>
             @endforeach
           </tbody>
         </table>
-        <div style="padding: 10px 0px;">
-          {{$data->links()}}
-        </div>
       </div>
     </div>
   </div>

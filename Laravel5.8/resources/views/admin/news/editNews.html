@@ -10,7 +10,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">系统配置</a></li>
-      <li class="breadcrumb-item active" aria-current="page">添加新闻</li>
+      <li class="breadcrumb-item active" aria-current="page">编辑新闻</li>
     </ol>
   </nav>
 </div>
@@ -29,24 +29,29 @@
           </ul>
         </div>
         @endif
-        <form class="forms-sample" action="{{route('admin.news.store')}}" method="post" enctype="multipart/form-data">
+        <form class="forms-sample" action="{{route('admin.news.update',['editDataId'  => $editNewsData->id])}}"
+              method="post" enctype="multipart/form-data">
+          @method('PUT')
           <div class="form-group">
             <label for="exampleInputUsername1">新闻标题</label>
-            <input type="text" class="form-control" name="title" placeholder="请输入新闻标题">
+            <input type="text" class="form-control" value="{{$editNewsData->title}}" name="title" placeholder="请输入新闻标题">
           </div>
           <div class="form-group">
             <label for="exampleTextarea1">新闻关键字</label>
-            <input type="text" class="form-control" name="keyWord" placeholder="请输入新闻关键字">
+            <input type="text" class="form-control" value="{{$editNewsData->keyWord}}" name="keyWord"
+                   placeholder="请输入新闻关键字">
           </div>
           <div class="form-group">
             <label for="exampleTextarea1">浏览量</label>
-            <input type="text" class="form-control" value="0" name="views" placeholder="请输入新闻浏览量">
+            <input type="text" class="form-control" value="{{$editNewsData->views}}" name="views"
+                   placeholder="请输入新闻浏览量">
           </div>
           <div class="form-group">
             <label>新闻图片</label>
             <input type="file" name="picture" class="file-upload-default">
             <div class="input-group col-xs-12">
-              <input type="text" class="form-control file-upload-info" disabled="" placeholder="新闻图片上传">
+              <input type="text" value="{{$editNewsData->picture}}" class="form-control file-upload-info" disabled=""
+                     placeholder="新闻图片上传">
               <span class="input-group-append">
                 <button class="file-upload-browse btn btn-gradient-primary" type="button">选择图片</button>
               </span>
@@ -54,15 +59,18 @@
           </div>
           <div class="form-group">
             <label for="exampleTextarea1">新闻描述</label>
-            <textarea class="form-control" name="describe" rows="4" placeholder="请输入新闻描述"></textarea>
+            <textarea class="form-control" name="describe" rows="4"
+                      placeholder="请输入新闻描述">{{$editNewsData->describe}}</textarea>
           </div>
           <div class="form-group">
             <label for="exampleTextarea1">新闻摘要</label>
-            <textarea class="form-control" name="abstract" rows="4" placeholder="请输入新闻摘要"></textarea>
+            <textarea class="form-control" name="abstract" rows="4"
+                      placeholder="请输入新闻摘要">{{$editNewsData->abstract}}</textarea>
           </div>
           <div class="form-group">
             <label for="exampleTextarea1">新闻内容</label>
-            <script id="content" name="content" type="text/plain" style="height:500px;"></script>
+            <script id="content" name="content" type="text/plain"
+                    style="height:500px;">{!! $editNewsData->content !!}</script>
           </div>
           <button type="submit" class="btn btn-gradient-primary mr-2">保存</button>
           @csrf
