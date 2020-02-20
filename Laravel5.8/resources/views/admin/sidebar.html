@@ -62,16 +62,25 @@
 </li>
 
 <li class="nav-item">
-  <a class="nav-link" href="#">
+  <a class="nav-link" href="{{route('admin.cases.index')}}">
     <span class="menu-title">案例管理</span>
     <i class="mdi mdi-chart-bar menu-icon"></i>
   </a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="#">
-    <span class="menu-title">单页管理</span>
-    <i class="mdi mdi-table-large menu-icon"></i>
+  <a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
+    <span class="menu-title">公司简介管理</span>
+    <i class="menu-arrow"></i>
+    <i class="mdi mdi-book-open-page-variant"></i>
   </a>
+  <div class="collapse" id="ui-basic3">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item"> <a class="nav-link" href="{{route('admin.companyProfile.create')}}">公司简介</a></li>
+      <li class="nav-item"> <a class="nav-link" href="{{route('admin.companyProfile.index')}}">招贤纳士</a></li>
+      <li class="nav-item"> <a class="nav-link" href="{{route('admin.companyProfile.developmentHistory')}}">发展历程</a>
+      </li>
+    </ul>
+  </div>
 </li>
 <li class="nav-item sidebar-actions">
   <span class="nav-link">

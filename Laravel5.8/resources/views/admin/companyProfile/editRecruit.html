@@ -1,0 +1,54 @@
+@section('tittle','编辑招聘信息');
+@extends('admin.default');
+
+<!-- 引入右边布局 -->
+@section('contend')
+<div class="page-header">
+  <h3 class="page-title">
+    <a href="{{route('admin.companyProfile.index')}}" class="btn btn-success btn-xs">返回招聘列表</a>
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="javascript:;">单页管理</a></li>
+      <li class="breadcrumb-item"><a href="{{route('admin.companyProfile.index')}}">招贤纳士</a></li>
+      <li class="breadcrumb-item active" aria-current="page">编辑招聘信息</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <!--显示表单验证的错误信息 -->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
+        <form class="forms-sample" action="{{route('admin.companyProfile.update',['id' => $companyProfileData->id])}}"
+              method="post" enctype="multipart/form-data">
+          <input type="hidden" name="type" value="2">
+          <div class="form-group">
+            <label for="exampleInputUsername1">职位</label>
+            <input type="text" class="form-control" name="title" placeholder="请输入职位名称"
+                   value="{{$companyProfileData->title}}">
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">职位描述</label>
+            <textarea class="form-control" name="describe" rows="6"
+                      placeholder="请输入职位描述">{{$companyProfileData->describe}}</textarea>
+          </div>
+          <button type="submit" class="btn btn-gradient-primary mr-2">保存</button>
+          @csrf
+          @method('PUT')
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

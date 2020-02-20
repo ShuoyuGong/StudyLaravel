@@ -27,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
     'App\Events\ProductPictureDeleteEvent' => [
       'App\Listeners\ProductPictureDeleteListener',
     ],
+    'App\Events\CasesPictureDeleteEvent' => [
+      'App\Listeners\CasesPictureDeleteListener',
+    ],
   ];
 
   /**

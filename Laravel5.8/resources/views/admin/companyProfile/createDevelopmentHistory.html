@@ -1,0 +1,57 @@
+@section('tittle','添加发展历程');
+@extends('admin.default');
+
+<!-- 引入右边布局 -->
+@section('contend')
+<div class="page-header">
+  <h3 class="page-title">
+    <a href="{{route('admin.companyProfile.developmentHistory')}}" class="btn btn-success btn-xs">返回发展历程首页</a>
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="javascript:;">单页管理</a></li>
+      <li class="breadcrumb-item"><a href="{{route('admin.companyProfile.index')}}">发展历程</a></li>
+      <li class="breadcrumb-item active" aria-current="page">添加发展历程</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <!--显示表单验证的错误信息 -->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
+        <!-- 判断是否有闪存数据 -->
+        @if(session()->has('arrMsg'))
+        <div class="alert alert-{{session('arrMsg')['class']}}">
+          {{session('arrMsg')['msg']}}
+        </div>
+        @endif
+        <form class="forms-sample" action="{{route('admin.companyProfile.store')}}" method="post"
+              enctype="multipart/form-data">
+          <input type="hidden" name="type" value="3">
+          <div class="form-group">
+            <label for="exampleInputUsername1">时间</label>
+            <input type="text" class="form-control" name="title" placeholder="请输入时间">
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">描述</label>
+            <input type="text" class="form-control" name="describe" placeholder="请输入描述">
+          </div>
+          <button type="submit" class="btn btn-gradient-primary mr-2">保存</button>
+          @csrf
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

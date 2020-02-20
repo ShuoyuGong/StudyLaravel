@@ -119,6 +119,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
   });
   // 产品管理----资源控制器
   Route::resource('/product', 'Admin\ProductController');
-  // 产品管理首页删除功能
-  // Route::get('/destroy/{productId}', 'Admin\ProductController@destroy')->name('product.destroy');
+  // 案例管理----资源控制器
+  Route::resource('/cases', 'Admin\CaseController');
+
+  // 公司简介管理----资源控制器*******************************************
+  // 加载 添加招聘信息 页面
+  Route::get('/companyProfile/createRecruit', 'Admin\CompanyProfileController@createRecruit')->name('companyProfile.createRecruit');
+  // 加载 发展历程 页面
+  Route::get('/companyProfile/DevelopmentHistory', 'Admin\CompanyProfileController@developmentHistory')->name('companyProfile.developmentHistory');
+  // 加载 添加发展历程信息 页面
+  Route::get('/companyProfile/createDevelopmentHistory', 'Admin\CompanyProfileController@createDevelopmentHistory')->name('companyProfile.createDevelopmentHistory');
+  // 加载 编辑发展信息历程 页面
+  Route::get('/companyProfile/editDevelopmentHistory/{companyProfile}', 'Admin\CompanyProfileController@editDevelopmentHistor')->name('companyProfile.editDevelopmentHistor');
+  Route::resource('/companyProfile', 'Admin\CompanyProfileController')->except('show');
 });
