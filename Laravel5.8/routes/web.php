@@ -126,10 +126,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
   // 加载 添加招聘信息 页面
   Route::get('/companyProfile/createRecruit', 'Admin\CompanyProfileController@createRecruit')->name('companyProfile.createRecruit');
   // 加载 发展历程 页面
-  Route::get('/companyProfile/DevelopmentHistory', 'Admin\CompanyProfileController@developmentHistory')->name('companyProfile.developmentHistory');
+  Route::get('/companyProfile/developmentHistory', 'Admin\CompanyProfileController@developmentHistory')->name('companyProfile.developmentHistory');
   // 加载 添加发展历程信息 页面
   Route::get('/companyProfile/createDevelopmentHistory', 'Admin\CompanyProfileController@createDevelopmentHistory')->name('companyProfile.createDevelopmentHistory');
   // 加载 编辑发展信息历程 页面
-  Route::get('/companyProfile/editDevelopmentHistory/{companyProfile}', 'Admin\CompanyProfileController@editDevelopmentHistor')->name('companyProfile.editDevelopmentHistor');
+  Route::get('/companyProfile/editDevelopmentHistory/{companyProfile}', 'Admin\CompanyProfileController@editDevelopmentHistory')->name('companyProfile.editDevelopmentHistor');
   Route::resource('/companyProfile', 'Admin\CompanyProfileController')->except('show');
+
+  //轮播图分类 管理--资源控制器******************************************
+  Route::resource('/bannerClassification', 'Admin\BannerClassificationController');
+  //轮播图列表 管理--资源控制器******************************************
+  Route::resource('/bannerItem', 'Admin\BannerItemController');
+  // jquery ajax 异步排序
+  Route::post('/bannerItem/setSort', 'Admin\BannerItemController@setSort')->name('bannerItem.setSort');
 });

@@ -17,6 +17,6 @@ class  Product extends Model
 
   public function category()
   {
-    return $this->belongsTo('App\Model\Admin\Category', 'cid');
+    return $this->belongsTo('App\Model\Admin\Category', 'cId');
   }
 }

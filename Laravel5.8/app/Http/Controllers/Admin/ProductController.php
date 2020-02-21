@@ -20,7 +20,7 @@ class ProductController extends Controller
   public function index(Request $request)
   {
     // 获取模型中数据进行重新编排
-    $ProductModel = new Product;
+    // $ProductModel = new Product;
     $catesList = Product::OrderBy('created_at', 'Desc')->OrderBy('id', 'Desc')->paginate(15);
     return view('admin.product.indexProduct')->with('catesList', $catesList);
   }

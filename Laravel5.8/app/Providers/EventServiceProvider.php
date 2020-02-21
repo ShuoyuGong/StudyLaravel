@@ -27,8 +27,13 @@ class EventServiceProvider extends ServiceProvider
     'App\Events\ProductPictureDeleteEvent' => [
       'App\Listeners\ProductPictureDeleteListener',
     ],
+    // 案例图片删除监听
     'App\Events\CasesPictureDeleteEvent' => [
       'App\Listeners\CasesPictureDeleteListener',
+    ],
+    // 轮播图 图片 删除监听
+    'App\Events\BannerPictureDeleteEvent' => [
+      'App\Listeners\BannerPictureDeleteListener',
     ],
   ];
 

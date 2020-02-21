@@ -12,3 +12,12 @@ function checkRes($blur = false, $msg = '操作')
     session()->flash('arrMsg', ['class' => 'danger', 'msg' => $msg . '失败']);
   }
 }
+
+
+/**
+ * 没有图片返回arrMsg
+ */
+function noPicture($info)
+{
+  return session()->flash('arrMsg', ['class' => 'danger', 'msg' => $info . '失败,请上传图片']);
+}

@@ -1,0 +1,53 @@
+@section('tittle','编辑轮播图分类');
+@extends('admin.default');
+
+<!-- 引入右边布局 -->
+@section('contend')
+<div class="page-header">
+  <h3 class="page-title">
+    轮播图管理
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">轮播图管理</a></li>
+      <li class="breadcrumb-item active" aria-current="page">编辑轮播图分类</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <!--显示表单验证的错误信息 -->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
+        <form class="forms-sample"
+              action="{{route('admin.bannerClassification.update',['bannerClassification' => $bannerClassificationData->id])}}"
+              method="post">
+          @method('PUT')
+          <div class="form-group">
+            <label for="exampleInputUsername1">名称</label>
+            <input type="text" class="form-control" name="title" placeholder="请输入轮播图分类名称"
+                   value="{{$bannerClassificationData->title}}">
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">英文名称</label>
+            <input type="text" class="form-control" name="entitle" placeholder="请输入轮播图英文分类名称"
+                   value="{{$bannerClassificationData->entitle}}">
+          </div>
+          <button type="submit" class="btn btn-gradient-primary mr-2">保存</button>
+          @csrf
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

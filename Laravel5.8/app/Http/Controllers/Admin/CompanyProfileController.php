@@ -53,16 +53,15 @@ class CompanyProfileController extends Controller
       'created_at'      =>      Date('Y-m-d H:i:s'),
       'updated_at'      =>      Date('Y-m-d H:i:s'),
     ];
+    if ($request->file('picture')) {
 
+      // 新图片地址保存进数据库
+      $data['picture']    =     $request->file('picture')->store('companyProfile');
+      // 删除旧图片
+      Storage::delete($request->picture);
+    }
     switch ($request->type) {
       case '1':
-        if ($request->file('picture')) {
-
-          // 新图片地址保存进数据库
-          $data['picture']    =     $request->file('picture')->store('companyProfile');
-          // 删除旧图片
-          // Storage::delete($request->picture);
-        }
         $res = CompanyProfile::updateOrCreate(['type' => 1], $data);
         checkRes($res, '公司简介设置');
         return redirect(route('admin.companyProfile.create'));
@@ -124,8 +123,13 @@ class CompanyProfileController extends Controller
       // 新图片地址保存进数据库
       $CompanyProfileModel->picture    =     $request->file('picture')->store('companyProfile');
     }
-    checkRes($CompanyProfileModel->save(), '招聘信息编辑');
-    return redirect(route('admin.companyProfile.index'));
+    if ($request->type == 2) {
+      checkRes($CompanyProfileModel->save(), '招聘信息编辑');
+      return redirect(route('admin.companyProfile.index'));
+    } elseif ($request->type == 3) {
+      checkRes($CompanyProfileModel->save(), '发展历程信息编辑');
+      return redirect(route('admin.companyProfile.developmentHistory'));
+    }
   }
 
   /**
@@ -136,9 +140,13 @@ class CompanyProfileController extends Controller
    */
   public function destroy(CompanyProfile $companyProfile)
   {
-    $res = $companyProfile->delete();
-    checkRes($res, '删除');
-    return redirect(route('admin.companyProfile.index'));
+    if ($companyProfile->type == 2) {
+      checkRes($companyProfile->delete(), '删除');
+      return redirect(route('admin.companyProfile.index'));
+    } elseif ($companyProfile->type == 3) {
+      checkRes($companyProfile->delete(), '删除');
+      return redirect(route('admin.companyProfile.developmentHistory'));
+    }
   }
 
 
