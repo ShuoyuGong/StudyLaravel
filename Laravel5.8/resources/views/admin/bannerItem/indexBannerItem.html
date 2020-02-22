@@ -43,15 +43,14 @@
             <tr>
               <td>{{$item->id}}</td>
               <td>{{$item->title}}</td>
-              <td>{{$item->banner->title}}</td>
+              <td>{{isset($item->banner->title)?$item->banner->title:''}}</td>
               <td>{{$item->digest}}</td>
               <td style="width: 70px;padding: 0px;">
                 <input type="text" class="form-control text-center setBannerItemSort" name="title"
-                       placeholder="请输入轮播图项目名称" value="{{$item->sort}}" style="width: 100%;padding: 10% 0%;"
-                       data-id="{{$item->id}}">
+                       value="{{$item->sort}}" style="width: 100%;padding: 10% 0%;" data-id="{{$item->id}}">
               </td>
               <td><img src="/fileUploads/{{$item->picture}}"></td>
-              <td>{{($item->isShow)?'是':'否'}}</td>
+              <td>{{$item->isShow}}</td>
               <td>
                 <a href="{{route('admin.bannerItem.edit',['bannerItem' => $item->id])}}" class="btn btn-success btn-sm"
                    role="button">编辑</a>

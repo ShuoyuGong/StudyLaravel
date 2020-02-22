@@ -26,4 +26,14 @@ class BannerItem extends Model
   protected $dispatchesEvents = [
     'deleted'    =>      BannerPictureDeleteEvent::class,
   ];
+
+  /***
+   * 数据库字段修改器
+   * 把 是否显示 字段的原始值1 0 做修改
+   * 字段首字母大写
+   */
+  public function getIsShowAttribute($value)
+  {
+    return $value ? "显示" : "隐藏";
+  }
 }

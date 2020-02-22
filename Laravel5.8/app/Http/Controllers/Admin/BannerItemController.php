@@ -93,11 +93,12 @@ class BannerItemController extends Controller
    */
   public function update(BannerItemPOST $request, $id)
   {
-    $BannerItemModel = BannerItem::find($id);
-    $BannerItemModel->title = $request->title;
-    $BannerItemModel->digest = $request->digest;
-    $BannerItemModel->sort = $request->sort;
-    $BannerItemModel->isShow = isset($request->isShow) ? $request->isShow : '0';
+    $BannerItemModel                      =          BannerItem::find($id);
+    $BannerItemModel->title               =          $request->title;
+    $BannerItemModel->digest              =          $request->digest;
+    $BannerItemModel->sort                =          $request->sort;
+    $BannerItemModel->BannerId            =          $request->BannerId;
+    $BannerItemModel->isShow              =          isset($request->isShow) ? $request->isShow : '0';
     if ($request->file('picture')) {
       // 删除旧图片
       Storage::delete($BannerItemModel->picture);

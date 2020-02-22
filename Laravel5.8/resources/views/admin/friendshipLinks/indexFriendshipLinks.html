@@ -1,0 +1,100 @@
+@section('tittle','友情链接管理');
+@extends('admin.default');
+
+<!-- 引入右边布局 -->
+@section('contend')
+<div class="page-header">
+  <h3 class="page-title">
+    <a href="{{route('admin.friendshipLinks.create')}}" class="btn btn-success btn-xs">添加友情链接项目</a>
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="javascript:;">友情链接管理</a></li>
+      <li class="breadcrumb-item active" aria-current="page">友情链接项目列表</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <!-- 判断是否有闪存数据 -->
+        @if(session()->has('arrMsg'))
+        <div class="alert alert-{{session('arrMsg')['class']}}">
+          {{session('arrMsg')['msg']}}
+        </div>
+        @endif
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr>
+              <th style="width:50px"> ID</th>
+              <th style="width:100px"> 名称</th>
+              <th style="width:200px"> URL地址</th>
+              <th style="width: 100px;"> 悬浮显示</th>
+              <th style="width: 70px;"> 排序</th>
+              <th style="width: 170px;"> 操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($friendshipLinksList as $item)
+            <tr>
+              <td>{{$item->id}}</td>
+              <td>{{$item->title}}</td>
+              <td>{{$item->url}}</td>
+              <td>{{$item->alt}}</td>
+              <td style="width: 70px;padding: 0px;">
+                <input type="text" class="form-control text-center setFriendshipLinksSort" name="title"
+                       value="{{$item->sort}}" style="width: 100%;padding: 10% 0%;" data-id="{{$item->id}}">
+              </td>
+              <td>
+                <a href="{{route('admin.friendshipLinks.edit',['friendshipLinks' => $item->id])}}"
+                   class="btn btn-success btn-sm" role="button">编辑</a>
+                <a onclick="forgedFormSubmit({{$item->id}})" class="btn btn-danger btn-sm" role="button">删除</a>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 引入jQuery -->
+<script src="{{asset(__ADMIN__)}}/js/jquery.min.js"></script>
+<!-- 伪造表单 实现用资源路由删除单条以及多条数据 -->
+<form action="{}" method="post" id="forgedForm">
+  @csrf
+  @method('DELETE')
+</form>
+<script>
+  /***
+   * 伪造表单的提交
+  */
+  function forgedFormSubmit(id) {
+    var src = "/admin/friendshipLinks/" + id;
+    document.getElementById("forgedForm").action = src;
+    document.getElementById("forgedForm").submit();
+  }
+
+
+  $(".setFriendshipLinksSort").on('change', function () {
+    var sort = $(this).val();
+    var dataId = $(this).data('id');
+    // 配合laravel框架post提交CSRF验证
+    var _token = "{{ csrf_token()}}";
+    if (isNaN(Number(sort))) {
+      alert('请输入数字')
+    } else {
+      $.post("{{route('admin.friendshipLinks.setSort')}}", { dataId: dataId, sort: sort, _token: _token }, function (res) {
+        if (res.status == 1) {
+          location.reload();
+        } else {
+          alert('排序失败，请联系管理员处理!');
+        }
+      });
+    }
+
+  });
+</script>
+@endsection

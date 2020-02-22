@@ -77,15 +77,42 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-  return view('welcome');
+
+
+
+
+// 网站首页直接显示
+Route::get('/', 'Home\IndexController@index')->name('/');
+
+// ****************************************前台路由组**********************************************
+Route::prefix('home')->name('home.')->group(function () {
+  // 产品页面展示
+  Route::get('/product', 'Home\ProductController@index')->name('product');
+  // 产品详情页面的展示
+  Route::get('/productDetail/{productDetailID}', 'Home\ProductController@showProductDetail')->name('productDetail');
 });
 
+
+
+
+
+// 登陆界面的展示
+Route::get('/admin', 'Admin\LoginController@index')->name("admin.login");
+// 退出登陆状态
+Route::get('/admin/login/loginOut', 'Admin\LoginController@loginOut')->name('admin.login.loginOut');
+// 处理登陆表单数据***********************************
+Route::post('/login/doLogin', 'Admin\LoginController@doLogin')->name('admin.login.doLogin');
+
 // ****************************************后台路由组**********************************************
-Route::prefix('admin')->name('admin.')->group(function () {
-  // 后台首页显示
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+
+  // 后台首页显示***************************************
   Route::get('/index', function () {
-    return view('admin/index/index');
+    if (Auth::check()) {
+      return view('admin/index/index');
+    } else {
+      return "请先登陆";
+    }
   })->name('index');
 
   // ***********配置路由组************
@@ -139,4 +166,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
   Route::resource('/bannerItem', 'Admin\BannerItemController');
   // jquery ajax 异步排序
   Route::post('/bannerItem/setSort', 'Admin\BannerItemController@setSort')->name('bannerItem.setSort');
+
+  // 友情链接 -- 资源控制器**********************************************
+  Route::resource('friendshipLinks', 'Admin\FriendshipLinksController');
+  // jquery ajax 异步排序
+  Route::post('/friendshipLinks/setSort', 'Admin\FriendshipLinksController@setSort')->name('friendshipLinks.setSort');
 });
