@@ -1,0 +1,36 @@
+@extends('home.default')
+
+@section('title','案例')
+
+@section('layui_this')
+<li class="layui-nav-item"><a href="{{route('/')}}">首页</a></li>
+<li class="layui-nav-item"><a href="{{route('home.product')}}">产品</a></li>
+<li class="layui-nav-item"><a href="{{route('home.news')}}">新闻</a></li>
+<li class="layui-nav-item layui-this"><a href="{{route('home.case')}}">案例</a></li>
+<li class="layui-nav-item"><a href="{{route('home.aboutUs')}}">关于</a></li>
+@endsection
+
+@section('content')
+<!-- banner部分 -->
+<div class="banner case">
+  <div class="title">
+    <p>{{$banner->title}}</p>
+    <p class="en">{{$banner->digest}}</p>
+  </div>
+</div>
+
+<!-- main部分 -->
+<div class="main-case">
+  <div class="layui-container">
+    <div class="layui-row">
+      @foreach($case_list as $c)
+      <div class="layui-inline content layui-col-space10" style="margin-right: 2em;">
+        <div class="layui-inline case-img"><img src="/fileUploads/{{$c->picture}}"></div>
+        <p class="lable">{{$c->title}}</p>
+        <p>{{$c->abstract}}</p>
+      </div>
+      @endforeach
+    </div>
+    <div id="casePage"></div>
+  </div>
+  @endsection

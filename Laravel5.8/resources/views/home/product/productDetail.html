@@ -1,12 +1,12 @@
 @extends('home.default')
-
+@section('title','产品详情-'.$productDetailID->title)
 
 @section('layui_this')
 <li class="layui-nav-item "><a href="{{route('/')}}">首页</a></li>
 <li class="layui-nav-item layui-this"><a href="{{route('home.product')}}">产品</a></li>
-<li class="layui-nav-item"><a href="news.html">动态</a></li>
-<li class="layui-nav-item"><a href="case.html">案例</a></li>
-<li class="layui-nav-item"><a href="about.html">关于</a></li>
+<li class="layui-nav-item"><a href="{{route('home.news')}}">新闻</a></li>
+<li class="layui-nav-item"><a href="{{route('home.case')}}">案例</a></li>
+<li class="layui-nav-item"><a href="{{route('home.aboutUs')}}">关于</a></li>
 @endsection
 
 
@@ -15,8 +15,8 @@
 <!-- banner部分 -->
 <div class="banner product" style="background-image: url(/fileUploads/{{$banner->picture}});">
   <div class="title">
-    <p>{{$banner->title}}</p>
-    <p class="en">{{$banner->digest}}</p>
+    <p></p>
+    <p class="en"></p>
   </div>
 </div>
 

@@ -90,6 +90,17 @@ Route::prefix('home')->name('home.')->group(function () {
   Route::get('/product', 'Home\ProductController@index')->name('product');
   // 产品详情页面的展示
   Route::get('/productDetail/{productDetailID}', 'Home\ProductController@showProductDetail')->name('productDetail');
+
+  // 新闻页面展示
+  Route::get('/news', 'Home\NewsController@getNewsList')->name('news');
+  // 新闻详情页面的展示
+  Route::get('/newsDetail/{newsDetail}', 'Home\NewsController@getNewsDetail')->name('newsDetail');
+
+  // 案例界面的展示
+  Route::get('/case', 'Home\CaseController@getCaseList')->name('case');
+
+  // 关于我们 页面的展示
+  Route::get('/aboutUs', 'Home\AboutUsController@getAboutUsList')->name('aboutUs');
 });
 
 

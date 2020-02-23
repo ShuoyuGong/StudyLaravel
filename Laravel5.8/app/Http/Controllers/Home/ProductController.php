@@ -29,7 +29,7 @@ class ProductController extends Controller
 
   public function showProductDetail(Product $productDetailID)
   {
-    DB::table('products')->where('id', '=', $productDetailID->id)->increment('views', 1);
+    Product::where('id', $productDetailID->id)->increment('views', 1);
     return view('home.product.productDetail')->with('productDetailID', $productDetailID)->with('banner', $this->banner);
   }
 }

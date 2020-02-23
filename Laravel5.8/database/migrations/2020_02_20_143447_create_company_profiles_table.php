@@ -17,7 +17,7 @@ class CreateCompanyProfilesTable extends Migration
       $table->bigIncrements('id');
       $table->integer('type')->default(1)->comment('1:公司简介 2:招贤纳士 3:发展历程');
       $table->string('title', 50)->comment('标题');
-      $table->string('describe', 50)->nullable(true)->comment('描述');
+      $table->string('describe', 150)->nullable(true)->comment('描述');
       $table->string('picture', 150)->nullable(true)->comment('图片');
       $table->text('detail', 150)->nullable(true)->comment('详情');
       $table->timestamps();

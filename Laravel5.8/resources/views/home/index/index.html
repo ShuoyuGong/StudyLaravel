@@ -4,9 +4,9 @@
 @section('layui_this')
 <li class="layui-nav-item layui-this"><a href="{{route('/')}}">首页</a></li>
 <li class="layui-nav-item "><a href="{{route('home.product')}}">产品</a></li>
-<li class="layui-nav-item"><a href="news.html">动态</a></li>
-<li class="layui-nav-item"><a href="case.html">案例</a></li>
-<li class="layui-nav-item"><a href="about.html">关于</a></li>
+<li class="layui-nav-item"><a href="{{route('home.news')}}">新闻</a></li>
+<li class="layui-nav-item"><a href="{{route('home.case')}}">案例</a></li>
+<li class="layui-nav-item"><a href="{{route('home.aboutUs')}}">关于</a></li>
 @endsection
 
 @section('content')
@@ -40,7 +40,7 @@
             <p class="label">{{$p->title}}</p>
             <p>{{$p->describe}}</p>
           </div>
-          <a href="javascript:;">查看产品 ></a>
+          <a href="{{route('home.productDetail',['productDetailID'=>$p->id])}}">查看产品 ></a>
         </div>
       </div>
       @endforeach

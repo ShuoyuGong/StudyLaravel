@@ -1,0 +1,69 @@
+@extends('home.default')
+@section('title','新闻首页')
+
+@section('layui_this')
+<li class="layui-nav-item"><a href="{{route('/')}}">首页</a></li>
+<li class="layui-nav-item"><a href="{{route('home.product')}}">产品</a></li>
+<li class="layui-nav-item layui-this"><a href="{{route('home.news')}}">新闻</a></li>
+<li class="layui-nav-item"><a href="{{route('home.case')}}">案例</a></li>
+<li class="layui-nav-item"><a href="{{route('home.aboutUs')}}">关于</a></li>
+@endsection
+
+
+@section('content')
+<!-- banner部分 -->
+<div class="banner news">
+  <div class="title">
+    <p>{{$banner->title}}</p>
+    <p class="en">{{$banner->digest}}</p>
+  </div>
+</div>
+<!-- main -->
+<div class="main-news">
+  <div class="layui-container">
+
+    <div class="layui-row layui-col-space20">
+      @foreach($news_list as $n)
+      <div class="layui-col-lg6 content">
+        <div>
+          <div class="news-img"><a href="newsDetail.html"><img src="/fileUploads/{{$n->picture}}"></a></div>
+          <div class="news-panel">
+            <strong><a href="{{route('home.newsDetail',['newsDetail' => $n->id])}}">{{$n->title}}</a></strong>
+            <p class="detail"><span>{{$n->describe}}</span><a href="newsDetail.html">[详细]</a></p>
+            <p class="read-push">阅读
+              <span>{{$n->views}}</span>&nbsp;&nbsp;&nbsp;&nbsp;发布时间：<span>{{$n->created_at}}</span></p>
+          </div>
+        </div>
+      </div>
+      @endforeach
+    </div>
+
+    <!-- <div>{{$news_list->links()}}<o/div> -->
+    <div id="newPage" class="layui-col-md5 layui-col-md-offset4"></div>
+  </div>
+</div>
+</div>
+@endsection
+
+
+@section('layuiJs')
+<script>
+  // layui 分页
+  layui.use(['laypage', 'layer'], function () {
+    var laypage = layui.laypage
+      , layer = layui.layer;
+    laypage.render({
+      elem: 'newPage'
+      , count: {{ $news_list-> total()}}
+      , theme: '#1E9FFF'
+    , limit: 6
+    , curr: {{ $news_list-> currentPage()}}
+    , jump: function (obj, first) {
+    if (!first) {
+      location.href = "?page=" + obj.curr;
+    }
+  }
+    });
+  });
+</script>
+@endsection

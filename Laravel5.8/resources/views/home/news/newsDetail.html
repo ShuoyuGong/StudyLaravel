@@ -1,13 +1,15 @@
 @extends('home.default')
-@section('title','产品页')
+@section('title','新闻详情-'.$newsDetail->title)
 
 @section('layui_this')
 <li class="layui-nav-item "><a href="{{route('/')}}">首页</a></li>
-<li class="layui-nav-item layui-this"><a href="{{route('home.product')}}">产品</a></li>
-<li class="layui-nav-item"><a href="{{route('home.news')}}">新闻</a></li>
+<li class="layui-nav-item"><a href="{{route('home.product')}}">产品</a></li>
+<li class="layui-nav-item  layui-this"><a href="{{route('home.news')}}">新闻</a></li>
 <li class="layui-nav-item"><a href="{{route('home.case')}}">案例</a></li>
 <li class="layui-nav-item"><a href="{{route('home.aboutUs')}}">关于</a></li>
 @endsection
+
+
 
 @section('content')
 <!-- banner部分 -->
@@ -17,23 +19,23 @@
     <p class="en">{{$banner->digest}}</p>
   </div>
 </div>
-<!-- main部分 -->
+
+
 <div class="main product">
   <div class="layui-container">
-    @foreach($product as $p)
     <div class="content layui-row">
       <div class="layui-col-xs12 layui-col-sm6 layui-col-md7 layui-col-lg6 content-img"><img
-             src="/fileUploads/{{$p->picture}}"></div>
+             src="/fileUploads/{{$newsDetail->picture}}"></div>
       <div class="layui-col-xs12 layui-col-sm6 layui-col-md5 layui-col-lg6 right">
-        <p class="label">{{$p->title}}</p>
-        <p class="detail">{{$p->describe}}</p>
-        <div><a href="{{route('home.productDetail',['productDetailID'=>$p->id])}}">查看产品详情 ></a></div>
+        <p class="label" style="margin: 0px;">{{$newsDetail->title}}</p>
+        <p class="detail" style="padding:0px;">详细说明：{!!$newsDetail->content!!}</p>
+        <p class="detail" style="margin-top: 10px;padding: 0px;">浏览量：{{$newsDetail->views}} </p>
+        <p class="detail" style="margin-top: 10px;">创建时间:{{$newsDetail->created_at}} </p>
+
+
+        <div><a href="{{route('home.news')}}">返回产品首页 &gt;</a></div>
       </div>
     </div>
-    @endforeach
   </div>
 </div>
-</body>
-
-</html>
 @endsection

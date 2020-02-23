@@ -65,6 +65,7 @@
     </div>
   </div>
   <script src="{{asset(__INDEX__)}}/res/layui/layui.js"></script>
+  <script src="{{asset(__INDEX__)}}/res/layui/lay/modules/laypage.js"></script>
   <!--[if lt IE 9]>
   <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
   <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -72,8 +73,12 @@
   <script>
     layui.config({
       base: '{{asset(__INDEX__)}}/res/static/js/'
-    }).use('firm'); 
+    }).use('firm');
+
   </script>
+  <!-- 插入layui.js -->
+  @yield('layuiJs')
 </body>
+
 
 </html>

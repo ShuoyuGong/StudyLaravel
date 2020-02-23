@@ -1,0 +1,70 @@
+@extends('home.default')
+
+@section('title','关于我们')
+
+@section('layui_this')
+<li class="layui-nav-item"><a href="{{route('/')}}">首页</a></li>
+<li class="layui-nav-item"><a href="{{route('home.product')}}">产品</a></li>
+<li class="layui-nav-item"><a href="{{route('home.news')}}">新闻</a></li>
+<li class="layui-nav-item"><a href="{{route('home.case')}}">案例</a></li>
+<li class="layui-nav-item  layui-this"><a href="{{route('home.aboutUs')}}">关于</a></li>
+@endsection
+
+
+@section('content')
+<!-- banner部分 -->
+<div class="banner about">
+  <div class="title active">
+    <p>关于我们</p>
+    <p class="en">About Us</p>
+  </div>
+</div>
+<!-- main部分 -->
+<div class="main-about">
+  <div class="layui-container">
+    <div class="layui-row">
+      <ul class="aboutab">
+        <li class="layui-this">公司简介</li>
+        <li class="">招贤纳士</li>
+        <li class="">发展历程</li>
+      </ul>
+      <div class="tabIntro" style="display: block;">
+        <div class="content">
+          <div class="layui-inline img"><img src="/fileUploads/{{$company_profile_list->picture}}"></div>
+          <div class="layui-inline panel">
+            <p>{{$company_profile_list->describe}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="tabJob" style="display: none;">
+        @foreach($recruit_list as $r)
+        <div class="content">
+          <p class="title">{{$r->title}}</p>
+          <p>&gt; 职位描述</p>
+          <ol>
+            <!-- <li>前端开发及维护工作；</li>
+            <li>有良好的技术基础，熟悉 Web 标准，熟练掌握多种 Web 前端技术；</li>
+            <li>掌握行业内流行的类库，Vue.js， React 等主流框架；</li>
+            <li>参与公司前端工程的设计、研发；</li>
+            <li>了解不同浏览器之间的差异，移动设备之间的差异。</li> -->
+            <li>{{$r->describe}}</li>
+          </ol>
+        </div>
+        @endforeach
+      </div>
+      <div class="tabCour" style="display: none;">
+        <p class="title">我们的蜕变</p>
+        <ul class="timeline">
+          <li class="odd">
+            <div class="cour-img"><img src="/fileUploads/{{$development_history_list->picture}}"></div>
+            <div class="cour-panel layui-col-sm4 layui-col-lg5">
+              <p class="label"> {{$development_history_list->title}} </p>
+              <p>{{$development_history_list->describe}}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
