@@ -207,7 +207,6 @@
   c.安装
     1.composer create-project laravel/laravel your-project-name --prefer-dist "5.1.*"
         命令   命令(创建项目)     包的名称        你的文件夹名称        优先的版本
-    2.
   d.配置
 
 
